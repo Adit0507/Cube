@@ -24,8 +24,8 @@ type Task struct {
 	State         State
 	Image         string
 	CPU           float64
-	Memory        int               //will help the system identify no. of resources a task needs
-	Disk          int               //this too
+	Memory        int64               //will help the system identify no. of resources a task needs
+	Disk          int64               //this too
 	ExposedPorts  nat.PortSet       //used by Docker to ensure machines allocates the proper network ports for the task
 	PortBindings  map[string]string //same as above
 	RestartPolicy string            //tells the system what to do in event a task stops or fails unexpectedly
