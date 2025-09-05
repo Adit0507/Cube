@@ -18,14 +18,6 @@ import (
 
 type State int
 
-const (
-	Pending   State = iota
-	Scheduled       //means system has figured out where to run the task
-	Running
-	Completed
-	Failed
-)
-
 type Task struct {
 	ID            uuid.UUID
 	ContainerID   string
@@ -71,6 +63,15 @@ func NewConfig(t *Task) *Config {
 		Image:        t.Image,
 		Cpu:          t.CPU,
 		Memory:       t.Memory,
+	}
+}
+
+func NewDocker(c *Config) *Docker {
+	dc, _ := client.NewClientWithOpts(client.FromEnv)
+
+	return  &Docker{
+		Client: dc,
+		Config: *c,
 	}
 }
 
